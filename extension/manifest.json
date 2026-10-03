@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Swipe to Skip for umingle",
+  "version": "1.0.0",
+  "description": "Swipe your hand to the right in front of your webcam to skip to the next person on umingle.com.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["*://umingle.com/*", "*://*.umingle.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["detector.html"],
+      "matches": ["*://umingle.com/*", "*://*.umingle.com/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}
