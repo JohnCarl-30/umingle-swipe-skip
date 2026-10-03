@@ -67,6 +67,6 @@ function render(size) {
 }
 
 for (const size of [16, 32, 48, 128]) {
-  writeFileSync(new URL(`../extension/icons/icon${size}.png`, import.meta.url), png(size, render(size)));
+  writeFileSync(new URL(`../static/icons/icon${size}.png`, import.meta.url), png(size, render(size)));
 }
 console.log('icons written');

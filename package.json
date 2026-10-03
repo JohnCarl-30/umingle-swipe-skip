@@ -1,15 +1,28 @@
 {
   "name": "swipe-to-skip",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Chrome extension: swipe right with your hand to skip on umingle.com",
   "scripts": {
-    "setup": "bash scripts/setup.sh",
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "check": "tsc && vitest run",
+    "package": "bash scripts/package.sh",
     "icons": "node scripts/make-icons.mjs",
-    "build": "bash scripts/build-zip.sh"
+    "fetch-model": "bash scripts/fetch-model.sh"
   },
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.0.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/chrome": "^0.3.4",
+    "@types/node": "^26.6.4",
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
 }

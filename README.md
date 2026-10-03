@@ -25,18 +25,38 @@ Click **Grant camera access** in the panel: it opens a tab where you allow the c
 
 ## Develop
 
+Written in TypeScript, bundled with esbuild.
+
 ```bash
-npm run setup   # copy MediaPipe runtime into extension/ and try to download the hand model
-npm run icons   # regenerate extension/icons
-npm run build   # package extension/ into dist/swipe-to-skip-<version>.zip
+npm install
+npm run build        # build the unpacked extension into dist/ (load this folder in Chrome)
+npm run watch        # rebuild on change
+npm run check        # type-check + tests
+npm run package      # build and zip into release/swipe-to-skip-<version>.zip
+npm run fetch-model  # optional: bundle the hand model instead of downloading it at runtime
+npm run icons        # regenerate static/icons
 ```
 
-If the model isn't bundled in `extension/models/`, the extension downloads it from Google on first load.
+```
+src/
+  content/   runs on umingle.com
+    index.ts    wires the panel, messages, skip and pick
+    panel.ts    draggable iframe that hosts the detector
+    buttons.ts  finds Skip / Really? buttons by label and presses them
+    skip.ts     Really?/Skip click sequence
+    picker.ts   "Pick skip button" mode
+  detector/  runs in the extension iframe
+    index.ts    camera, MediaPipe HandLandmarker, preview, panel UI
+    swipe.ts    palm tracking → swipe-right detection
+  shared/    message and storage types
+static/      manifest, detector.html/css, icons (copied into dist/)
+tests/       vitest: swipe detection and skip flow on fake pages
+```
 
 ### How it works
 
-- `content.js` injects `detector.html` as a draggable iframe (`allow="camera"`) and, on a `swipe` message, clicks Really?/Skip. It finds buttons by your saved pick, then by label (Skip / Next / New / Start), then id/class names, else sends Esc.
-- `detector.js` runs MediaPipe HandLandmarker on each frame, tracks the palm centre, and fires when it travels right by ≥ ~24 % of the frame width within 500 ms without much vertical drift.
+- The content script injects `detector.html` as a draggable iframe (`allow="camera"`) and, on a `swipe` message, clicks Really?/Skip. It finds buttons by your saved pick, then by label (Skip / Next / New / Start), then id/class names, else sends Esc.
+- The detector runs MediaPipe HandLandmarker on each frame, tracks the palm centre, and fires when it travels right by ≥ ~24 % of the frame width within 500 ms without much vertical drift.
 
 ## Privacy
 
