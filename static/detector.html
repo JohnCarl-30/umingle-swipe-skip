@@ -7,27 +7,91 @@
 </head>
 <body>
   <div id="panel">
-    <div id="header">
-      <span id="dot" class="dot loading"></span>
-      <span id="status">Loading…</span>
-      <button id="collapse" title="Hide preview">–</button>
-    </div>
+    <header id="header" title="Drag to move">
+      <div id="pill" class="pill">
+        <span id="dot" class="dot loading"></span>
+        <span id="status">Loading…</span>
+      </div>
+      <span class="grip" aria-hidden="true">⠿</span>
+      <label class="switch" title="Gestures on/off">
+        <input type="checkbox" id="enabled" checked>
+        <span class="track"><span class="knob"></span></span>
+      </label>
+      <button id="collapse" class="icon-btn" title="Minimize">–</button>
+    </header>
+
     <div id="stage">
       <video id="video" playsinline muted></video>
-      <canvas id="canvas" width="160" height="120"></canvas>
+      <canvas id="canvas" width="320" height="240"></canvas>
+      <div id="hold"><div id="holdBar"></div></div>
       <div id="flash">⏭ SKIP</div>
+      <div id="liveBadge" hidden>● LIVE FILTER</div>
     </div>
-    <div id="controls">
-      <label class="row" title="Turn swipe detection on/off">
-        <input type="checkbox" id="enabled" checked> Enabled
+
+    <nav id="tabs" role="tablist">
+      <button role="tab" data-tab="skip" class="tab">Skip</button>
+      <button role="tab" data-tab="filters" class="tab">Filters</button>
+      <button role="tab" data-tab="scare" class="tab">Scare</button>
+    </nav>
+
+    <section id="tab-skip" class="tabpanel">
+      <div class="chips">
+        <button class="chip toggle" id="swipe" aria-pressed="true">👋 Swipe</button>
+        <button class="chip toggle" id="thumbsDown" aria-pressed="true">👎 Thumbs down</button>
+      </div>
+      <label class="slider">
+        <span>Swipe sensitivity</span>
+        <input type="range" id="sensitivity" min="1" max="5" step="1" value="3">
       </label>
-      <label class="row" title="How far your hand must travel">
-        Sensitivity <input type="range" id="sensitivity" min="1" max="5" step="1" value="3">
+      <div class="actions">
+        <button id="pick" class="btn" title="Click this, then click umingle's skip button once">🎯 Pick skip button</button>
+        <button id="grant" class="btn warn" hidden>Grant camera access</button>
+      </div>
+    </section>
+
+    <section id="tab-filters" class="tabpanel" hidden>
+      <div class="group">
+        <div class="label">Look</div>
+        <div class="chips" id="colorFilter"></div>
+      </div>
+      <div class="group">
+        <div class="label">Background</div>
+        <div class="chips" id="background"></div>
+      </div>
+      <div class="group">
+        <div class="label">Face</div>
+        <div class="chips" id="faceEffect"></div>
+      </div>
+      <div id="filterStatus"></div>
+    </section>
+
+    <section id="tab-scare" class="tabpanel" hidden>
+      <div class="chips">
+        <button class="chip toggle" id="scare" aria-pressed="false">😱 Jumpscare</button>
+      </div>
+      <div class="group">
+        <div class="label">When they…</div>
+        <div class="chips" id="scareTrigger">
+          <button class="chip" data-value="hand">✋ Show a hand</button>
+          <button class="chip" data-value="wave">👋 Wave</button>
+        </div>
+      </div>
+      <label class="slider">
+        <span>Scream volume</span>
+        <input type="range" id="scareVolume" min="0" max="1" step="0.05" value="0.8">
       </label>
-      <button id="pick" title="Click this, then click umingle's skip button once">Pick skip button</button>
-      <button id="grant" hidden>Grant camera access</button>
-    </div>
+      <div class="row-buttons">
+        <button id="scareTest" class="btn">▶ Test</button>
+        <button id="scareImageBtn" class="btn">🖼 Image</button>
+        <button id="scareSoundBtn" class="btn">🔊 Sound</button>
+      </div>
+      <button id="scareReset" class="link" hidden>Reset to default image & scream</button>
+      <input type="file" id="scareImageFile" accept="image/*" hidden>
+      <input type="file" id="scareSoundFile" accept="audio/*" hidden>
+      <div id="scareStatus"></div>
+    </section>
   </div>
+
   <div id="grantPage" hidden>
     <h1>Swipe to Skip</h1>
     <p id="grantMsg">Requesting camera access…</p>

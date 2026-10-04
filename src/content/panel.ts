@@ -12,16 +12,16 @@ export class Panel {
     const frame = document.createElement('iframe');
     frame.id = 'swipe-skip-frame';
     frame.src = src;
-    frame.allow = 'camera';
-    this.pos = { left: MARGIN, top: Math.max(MARGIN, window.innerHeight - 260 - MARGIN) };
+    frame.allow = 'camera; autoplay'; // autoplay: lets the scream play on your speakers
+    this.pos = { left: MARGIN, top: Math.max(MARGIN, window.innerHeight - 420 - MARGIN) };
     Object.assign(frame.style, {
       position: 'fixed',
       left: `${this.pos.left}px`,
       top: `${this.pos.top}px`,
-      width: '192px',
-      height: '260px',
+      width: '262px',
+      height: '420px',
       border: '0',
-      borderRadius: '12px',
+      borderRadius: '16px',
       boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
       zIndex: '2147483647',
       background: 'transparent',

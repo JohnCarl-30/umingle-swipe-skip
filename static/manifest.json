@@ -1,26 +1,49 @@
 {
   "manifest_version": 3,
   "name": "Swipe to Skip for umingle",
-  "version": "1.1.0",
-  "description": "Swipe your hand to the right in front of your webcam to skip to the next person on umingle.com.",
+  "version": "1.2.0",
+  "description": "Swipe right or thumbs-down to skip on umingle.com, Photo Booth-style camera filters, and a jumpscare for strangers who show a hand.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
-      "matches": ["*://umingle.com/*", "*://*.umingle.com/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
+      "matches": [
+        "*://umingle.com/*",
+        "*://*.umingle.com/*"
+      ],
+      "js": [
+        "hook.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://umingle.com/*",
+        "*://*.umingle.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["detector.html"],
-      "matches": ["*://umingle.com/*", "*://*.umingle.com/*"]
+      "resources": [
+        "detector.html"
+      ],
+      "matches": [
+        "*://umingle.com/*",
+        "*://*.umingle.com/*"
+      ]
     }
   ],
   "content_security_policy": {

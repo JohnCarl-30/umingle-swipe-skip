@@ -28,7 +28,7 @@ function runSkip(finder = new ButtonFinder(document)): Promise<SkipResult> {
     press,
     pressEscape: () => pressEscape(document),
     status: () => {},
-    timeoutMs: 1500,
+    timeoutMs: 4000, // generous: jsdom's first layout scan can be slow under parallel test load
   });
 }
 

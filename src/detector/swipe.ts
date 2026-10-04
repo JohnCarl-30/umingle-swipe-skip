@@ -29,7 +29,7 @@ export interface SwipeConfig {
 export const DEFAULT_SWIPE_CONFIG: SwipeConfig = {
   windowMs: 500,
   maxDyRatio: 0.7,
-  cooldownMs: 1500,
+  cooldownMs: 1000,
   lostMs: 250,
 };
 

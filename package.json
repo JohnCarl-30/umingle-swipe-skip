@@ -1,6 +1,6 @@
 {
   "name": "swipe-to-skip",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Chrome extension: swipe right with your hand to skip on umingle.com",
   "scripts": {
     "build": "node scripts/build.mjs",

@@ -33,8 +33,10 @@ describe('SwipeDetector', () => {
     expect(countSwipes((f) => ({ x: 0.5 + 0.03 * Math.sin(f * 60), y: 0.5 }), 3000)).toBe(0);
   });
 
-  it('fires once per cooldown when waving back and forth', () => {
-    expect(countSwipes((f) => ({ x: 0.5 + 0.3 * Math.sin(f * Math.PI * 6), y: 0.5 }), 1200)).toBe(1);
+  it('fires at most once per 1 s cooldown when waving back and forth', () => {
+    const wave = (f: number): Point => ({ x: 0.5 + 0.3 * Math.sin(f * Math.PI * 6), y: 0.5 });
+    expect(countSwipes(wave, 900)).toBe(1); // second right stroke lands inside the cooldown
+    expect(countSwipes(wave, 1200)).toBe(2); // ...but after 1 s it can skip again
   });
 
   it('needs less travel at higher sensitivity', () => {

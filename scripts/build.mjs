@@ -13,16 +13,15 @@ function copyAssets() {
   cpSync('static', out, { recursive: true });
   mkdirSync(`${out}/vendor/wasm`, { recursive: true });
   for (const f of wasmFiles) cpSync(`${wasmSrc}/${f}`, `${out}/vendor/wasm/${f}`);
-  if (existsSync('models/hand_landmarker.task')) {
-    mkdirSync(`${out}/models`, { recursive: true });
-    cpSync('models/hand_landmarker.task', `${out}/models/hand_landmarker.task`);
-  }
+  // Optional bundled models (npm run fetch-model); otherwise fetched at runtime.
+  if (existsSync('models')) cpSync('models', `${out}/models`, { recursive: true });
 }
 
 const shared = { bundle: true, target: 'chrome120', logLevel: 'info', legalComments: 'none' };
 const configs = [
   // Content scripts can't be ES modules.
   { ...shared, entryPoints: ['src/content/index.ts'], outfile: `${out}/content.js`, format: 'iife' },
+  { ...shared, entryPoints: ['src/hook/index.ts'], outfile: `${out}/hook.js`, format: 'iife' },
   { ...shared, entryPoints: ['src/detector/index.ts'], outfile: `${out}/detector.js`, format: 'esm' },
 ];
 
