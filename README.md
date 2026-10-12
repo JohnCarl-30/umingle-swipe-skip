@@ -1,6 +1,25 @@
 # Swipe to Skip for umingle
 
-Chrome extension: swipe your hand to the right in front of your webcam and it skips to the next person on umingle.com. Hand tracking runs locally with MediaPipe; no video leaves your machine.
+[![Latest release](https://img.shields.io/github/v/release/JohnCarl-30/umingle-swipe-skip)](https://github.com/JohnCarl-30/umingle-swipe-skip/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Chrome extension](https://img.shields.io/badge/Chrome-extension-4285F4?logo=googlechrome&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+
+**A hand-gesture Chrome extension for umingle.com: skip to the next stranger by swiping your hand or giving a thumbs-down, with no keyboard or mouse needed.** It also adds Photo Booth- and Snapchat-style camera filters and a jumpscare prank. Hand and face tracking run locally in your browser with MediaPipe; no video leaves your machine.
+
+Works in Chrome, Edge, Brave, and other Chromium browsers.
+
+<!-- Add a screenshot or GIF of the panel and a swipe here, e.g.:
+![Swipe to Skip panel](docs/demo.gif)
+-->
+
+**Features**
+
+- 👋 **Swipe to skip:** swipe right in front of your webcam to skip to the next person
+- 👎 **Thumbs-down to skip:** hold a thumbs-down for half a second
+- 🎨 **Camera filters the other person sees:** Sepia, B&W, Comic, Thermal, X-Ray, background blur, dog ears, face distortions and more
+- 😱 **Jumpscare:** scare strangers who show a hand or wave
+- 🔒 **Private:** everything runs on your device
 
 ## Install (anyone)
 
@@ -8,8 +27,6 @@ Chrome extension: swipe your hand to the right in front of your webcam and it sk
 2. Open `chrome://extensions` and turn on **Developer mode** (top right).
 3. Click **Load unpacked** and select the unzipped folder.
 4. Open umingle.com. A small panel appears with your camera preview.
-
-Works in Chrome, Edge, Brave, and other Chromium browsers.
 
 ## Use
 
@@ -95,3 +112,7 @@ tests/       vitest: swipe detection and skip flow on fake pages
 ## Privacy
 
 See [PRIVACY.md](PRIVACY.md). Not affiliated with umingle.
+
+## License
+
+[MIT](LICENSE)
